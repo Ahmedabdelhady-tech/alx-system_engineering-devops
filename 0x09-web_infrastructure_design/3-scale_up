@@ -1,0 +1,14 @@
+User Browser
+     |
+     v
+DNS Server -> Load Balancer Cluster (HAProxy Active-Active)
+     |
+     v
++-------------------+
+|   Load Balancers   |
++---------+---------+
+          |
++---------+---------+---------+
+|         |         |         |
+Web Server Application Server Database Server
+ (Nginx)   (Django)       (MySQL)
