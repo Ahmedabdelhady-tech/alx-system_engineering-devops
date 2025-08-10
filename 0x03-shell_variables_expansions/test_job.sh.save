@@ -1,0 +1,16 @@
+#!/bin/bash
+echo "Job Started!"
+for i in {1..60}
+do
+
+	echo "working ...$i"
+	sleep 60
+
+
+	echo "working ...$i"
+	sleep 120
+
+	command ping -i 5 google.com
+done
+
+echo "Job Finished!"

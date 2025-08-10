@@ -1,0 +1,105 @@
+Simple Web Stack Infrastructure for <www.foobar.com>
+
+Scenario: User Accessing <www.foobar.com>
+A user opens their browser and types <www.foobar.com>.
+
+The browser sends a DNS query to translate <www.foobar.com> into an IP address.
+
+The DNS server responds with the IP address 8.8.8.8 which points to the web server.
+
+The browser sends an HTTP request to the server at 8.8.8.8.
+
+The web server (Nginx) receives the request and forwards it to the application server.
+
+The application server processes the request, interacts with the MySQL database if needed, and generates a response.
+
+The response (usually HTML, CSS, JS) is sent back through the web server to the user's browser.
+
+The browser renders the webpage.
+
+Components & Roles
+
+1. Server
+A physical or virtual machine that runs software to provide services.
+
+In this setup, the server hosts all components: web server, application server, database, and application files.
+
+2. Domain Name
+A human-readable address (<www.foobar.com>) that maps to an IP address.
+
+It simplifies accessing the website instead of typing the numeric IP.
+
+3. DNS Record Type
+The www in <www.foobar.com> is a CNAME or A record in DNS.
+
+In this case, <www.foobar.com> uses an A record pointing directly to the IP 8.8.8.8.
+
+4. Web Server (Nginx)
+Listens for HTTP/HTTPS requests from users.
+
+Serves static files directly.
+
+Acts as a reverse proxy, forwarding dynamic requests to the application server.
+
+5. Application Server
+Runs the backend application logic (e.g., Django, Flask, Node.js).
+
+Processes user requests, queries the database, applies business logic.
+
+Generates dynamic content for the website.
+
+6. Application Files
+The codebase and resources of the web application hosted on the server.
+
+7. Database (MySQL)
+Stores persistent data like users, posts, configurations.
+
+The application server queries and updates the database as needed.
+
+8. Communication Protocol
+The server communicates with the user's browser using the HTTP or HTTPS protocol over TCP/IP.
+
+Infrastructure Diagram (Whiteboard style)
+
+User Browser
+    |
+    | HTTP request to <www.foobar.com>
+    v
+[ DNS Server ]
+    |
+    | returns IP 8.8.8.8
+    v
+[ Server 8.8.8.8 ]
+    |
+    |-- Nginx (Web Server) -----------------
+    |                 |
+    |        Serves static files             Forwards dynamic requests
+    |                 |                      to
+    |                 v
+    |          [Application Server] ------> [MySQL Database]
+    |                 |
+    |        Returns response                Stores and serves data
+    |                 |
+    -----------------------------------------
+    |
+    v
+User Browser receives response
+
+Issues with This Infrastructure
+
+1. Single Point of Failure (SPOF)
+Only one server hosting all services.
+
+If the server crashes, the whole website goes down.
+
+2. Downtime for Maintenance
+Deploying new code or restarting services causes downtime.
+
+No redundancy or load balancing to allow zero downtime deployments.
+
+3. Scalability Limitations
+One server can handle limited traffic.
+
+Cannot handle spikes or high traffic volumes.
+
+No ability to distribute load or scale horizontally.
