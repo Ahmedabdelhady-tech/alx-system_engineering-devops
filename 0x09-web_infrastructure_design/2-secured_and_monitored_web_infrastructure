@@ -1,0 +1,19 @@
+              +-------------------+
+              |    DNS Server     |
+              +---------+---------+
+                        |
+                        v
+              +---------+---------+
+              |   Load Balancer   | (SSL Termination)
+              +---------+---------+
+                        |
+            +-----------+------------+
+            |           |            |
+    +-------+--+  +-----+-----+  +---+-------+
+    | Firewall |  | Firewall  |  | Firewall  |
+    +-------+--+  +-----+-----+  +---+-------+
+            |           |            |
+      Server 1     Server 2     Server 3
+      (Web + App + DB + Monitoring Clients)
+      
+Monitoring Clients send data to centralized monitoring service (e.g., Sumologic)
